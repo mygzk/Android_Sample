@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.gzk.sample.activity.ActivityLifeTestActivity;
+import com.gzk.sample.activity.DialogTestActivity;
+import com.gzk.sample.activity.EditListTestActivity;
 import com.gzk.sample.activity.Main2Activity;
 import com.gzk.sample.adapter.MyActivityAdapter;
 import com.gzk.sample.model.MyActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,15 +29,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        activityListView = (ListView)findViewById(R.id.list_activity);
+        activityListView = (ListView) findViewById(R.id.list_activity);
         listDate = new ArrayList<>();
-        listDate.add(new MyActivity(Main2Activity.class,"Main2Activity"));
-        activityListView.setAdapter(new MyActivityAdapter(MainActivity.this,listDate));
+        listDate.add(new MyActivity(Main2Activity.class, "Main2Activity"));
+        listDate.add(new MyActivity(EditListTestActivity.class, "EditListTestActivity"));
+        listDate.add(new MyActivity(ActivityLifeTestActivity.class, "ActivityLifeTestActivity"));
+        listDate.add(new MyActivity(DialogTestActivity.class, "DialogTestActivity"));
+
+
+        activityListView.setAdapter(new MyActivityAdapter(MainActivity.this, listDate));
         activityListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MyActivity myActivityItem = listDate.get(position);
-                Intent activityIntent = new Intent(MainActivity.this,myActivityItem.getMyClassActivity());
+                Intent activityIntent = new Intent(MainActivity.this, myActivityItem.getMyClassActivity());
                 startActivity(activityIntent);
             }
         });

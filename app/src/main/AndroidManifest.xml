@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gzk.sample" >
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -12,13 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity android:name=".MainActivity" >
+
+        </activity>
+        <activity android:name=".activity.Main2Activity" >
+        </activity>
+        <activity android:name=".activity.EditListTestActivity" >
+        </activity>
+        <activity android:name=".activity.ActivityLifeTestActivity" >
+        </activity>
+        <activity android:name=".activity.DialogTestActivity" >
+        </activity>
+        <activity android:name=".activity.DialogActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activity.Main2Activity" >
         </activity>
     </application>
 

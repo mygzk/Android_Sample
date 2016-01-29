@@ -24,7 +24,7 @@ public class TestFragment extends Fragment {
 
 
     private Button btnCamera;
-    private int requestcode_camera = 100;
+    private int requestcodeCamera = 100;
     private Uri mPhotoUri = null;
 
     public static TestFragment newInstance() {
@@ -61,7 +61,7 @@ public class TestFragment extends Fragment {
 
                 mPhotoUri = doTakePhoto(getActivity(),
                         TestFragment.this,
-                        requestcode_camera);
+                        requestcodeCamera);
 
             }
         });
@@ -71,7 +71,6 @@ public class TestFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         Log.e(TAG, "onActivityResult requestCode:" + requestCode);
         Log.e(TAG, "onActivityResult resultCode:" + resultCode);
         Log.e(TAG, "onActivityResult data:" + data);
