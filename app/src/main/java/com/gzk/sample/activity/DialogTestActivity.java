@@ -10,12 +10,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.gzk.sample.R;
 
 public class DialogTestActivity extends AppCompatActivity {
     private static final String TAG = DialogTestActivity.class.getSimpleName();
-    private Button btnDialog;
+    private TextView btnDialog;
 
     private Dialog mDialog = null;
 
@@ -24,7 +25,8 @@ public class DialogTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog_test);
 
-        btnDialog = (Button) findViewById(R.id.btndiaolog);
+        btnDialog = (TextView) findViewById(R.id.btndiaolog);
+
         btnDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

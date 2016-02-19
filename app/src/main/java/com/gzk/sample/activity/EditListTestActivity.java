@@ -27,7 +27,7 @@ public class EditListTestActivity extends AppCompatActivity {
         editListview = (ListView) findViewById(R.id.test_list_editText);
         listData = new ArrayList<>();
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             listData.add("sssss-" + i);
         }
 

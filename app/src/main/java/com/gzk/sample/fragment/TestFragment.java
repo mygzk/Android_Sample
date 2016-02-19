@@ -10,7 +10,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,9 @@ import com.gzk.sample.R;
 
 public class TestFragment extends Fragment {
     private static final String TAG = TestFragment.class.getSimpleName();
+    private static final String TAG1 = TestFragment.class.getSimpleName() + "-01";
+
+    private static final String ImgURl = "imgurl";
 
 
     private Button btnCamera;
@@ -41,6 +47,7 @@ public class TestFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         Log.e(TAG, "===onCreate===");
     }
 
@@ -54,6 +61,17 @@ public class TestFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if (savedInstanceState != null) {
+            if (!TextUtils.isEmpty(savedInstanceState.getString(ImgURl, null))) {
+
+                mPhotoUri = Uri.parse(savedInstanceState.getString(ImgURl, null));
+            }
+            Log.e(TAG, "onViewCreated savedInstanceState:" + savedInstanceState.toString());
+        }
+
+
+        Log.e(TAG, "onViewCreated mPhotoUri:" + (mPhotoUri + "").toString());
+
         btnCamera = (Button) view.findViewById(R.id.btnCamera);
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,16 +83,16 @@ public class TestFragment extends Fragment {
 
             }
         });
-    }
 
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e(TAG, "onActivityResult requestCode:" + requestCode);
-        Log.e(TAG, "onActivityResult resultCode:" + resultCode);
-        Log.e(TAG, "onActivityResult data:" + data);
-        Log.e(TAG, "onActivityResult mPhotoUri:" + mPhotoUri);
+        Log.e(TAG + "1", "onActivityResult requestCode:" + requestCode);
+        Log.e(TAG + "1", "onActivityResult resultCode:" + resultCode);
+        Log.e(TAG + "1", "onActivityResult data:" + data);
+        Log.e(TAG + "1", "onActivityResult mPhotoUri:" + mPhotoUri);
         if (resultCode == -1) {
 
         }
@@ -107,16 +125,18 @@ public class TestFragment extends Fragment {
         return mPhotoUri;
     }
 
-
+/*
     @Override
     public void onPause() {
         Log.e(TAG, "===onPause===");
+        Log.e(TAG1, "=TAG1==onPause===");
         super.onPause();
     }
 
     @Override
     public void onStop() {
         Log.e(TAG, "===onStop===");
+        Log.e(TAG1, "==TAG1=onStop===");
         super.onStop();
     }
 
@@ -124,12 +144,14 @@ public class TestFragment extends Fragment {
     public void onDestroy() {
         Log.e(TAG, "===onDestroy===");
         super.onDestroy();
-    }
+    }*/
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        Log.e(TAG, "===onSaveInstanceState===");
+//        Log.e(TAG, "===onSaveInstanceState===");
+        Log.e(TAG, "===onSaveInstanceState=mPhotoUri:" + mPhotoUri);
         super.onSaveInstanceState(outState);
+        outState.putString(ImgURl, mPhotoUri + "");
     }
 
     @Override
@@ -142,6 +164,8 @@ public class TestFragment extends Fragment {
     public void onViewStateRestored(Bundle savedInstanceState) {
         Log.e(TAG, "===onViewStateRestored===");
         super.onViewStateRestored(savedInstanceState);
+
+
     }
 
 

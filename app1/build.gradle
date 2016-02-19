@@ -5,8 +5,8 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.gzk.sample"
-        minSdkVersion 21
+        applicationId "com.putao.app1"
+        minSdkVersion 18
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
