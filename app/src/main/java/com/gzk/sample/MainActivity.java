@@ -13,6 +13,7 @@ import com.gzk.sample.activity.DialogActivity;
 import com.gzk.sample.activity.DialogTestActivity;
 import com.gzk.sample.activity.EditListTestActivity;
 import com.gzk.sample.activity.Main2Activity;
+import com.gzk.sample.activity.ServiceTestActivity;
 import com.gzk.sample.activity.TestActivity;
 import com.gzk.sample.adapter.MyActivityAdapter;
 import com.gzk.sample.model.MyActivity;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         listDate.add(new MyActivity(DialogActivity.class, "DialogActivity"));
         listDate.add(new MyActivity(CameraActivity.class, "CameraActivity"));
         listDate.add(new MyActivity(TestActivity.class, "TestActivity"));
+        listDate.add(new MyActivity(ServiceTestActivity.class, "ServiceTestActivity"));
 
 
         activityListView.setAdapter(new MyActivityAdapter(MainActivity.this, listDate));

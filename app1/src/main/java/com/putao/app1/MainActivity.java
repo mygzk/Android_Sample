@@ -1,11 +1,13 @@
 package com.putao.app1;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +24,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnTest3;
     private Button btnTest4;
 
+    private Messenger messenger;
+    private Messenger reply;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +34,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initView();
 
+        messageService();
 
+    }
+
+
+    private void aidlService() {
         Intent intent = new Intent();
         intent.setAction("com.gzk.sample.aidl.CalulateService");
+        //intent.setAction("com.gzk.sample.service.MessengerTestService");
         intent.setPackage("com.gzk.sample");
 
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        bindService(intent, mAidlConnection, Context.BIND_AUTO_CREATE);
+    }
+
+
+    private void messageService() {
+
+        reply = new Messenger(handler);
+        Intent intent = new Intent();
+        intent.setAction("com.gzk.sample.service.MessengerTestService");
+        intent.setPackage("com.gzk.sample");
+
+        bindService(intent, mMessagerConnection, Context.BIND_AUTO_CREATE);
     }
 
     private void initView() {
@@ -65,41 +87,79 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intentActivity(Main3Activity.class);
                 break;
             case R.id.btnTest4:
-                try {
+              /*  try {
                     double result = mCalculateInterface.doCalculate(1,2);
 
                     Log.e("log","=mCalculateInterface====result:"+result);
                 } catch (RemoteException e) {
                     e.printStackTrace();
-                }
+                }*/
+
+                sendMessage();
                 break;
             default:
                 break;
         }
     }
 
-    private void intentActivity(Class activity){
-        Intent intent = new Intent(MainActivity.this,activity);
+    private void intentActivity(Class activity) {
+        Intent intent = new Intent(MainActivity.this, activity);
         startActivity(intent);
     }
-
 
 
     //CalculateInterface mCalculateInterface;
 
     private CalculateInterface mCalculateInterface;
 
-    private ServiceConnection mConnection = new ServiceConnection(){
+    private ServiceConnection mAidlConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className,
-                                       IBinder service){
+                                       IBinder service) {
 
             mCalculateInterface = CalculateInterface.Stub.asInterface(service);
         }
 
-        public void onServiceDisconnected(ComponentName className){
+        public void onServiceDisconnected(ComponentName className) {
             mCalculateInterface = null;
         }
     };
 
 
+///////////////////////////////////////////////////////////////////////////////////
+
+    private ServiceConnection mMessagerConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            messenger = new Messenger(service);
+            Log.e("log", "绑定成功");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
+
+    public void sendMessage() {
+        Message msg = Message.obtain(null, 1);
+        // 设置回调用的Messenger
+        msg.replyTo = reply;
+        try {
+            messenger.send(msg);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Handler handler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            Log.e("log", "回调成功");
+        }
+
+    };
+
+///////////////////////////////////////////////////////////////////////////////////
 }

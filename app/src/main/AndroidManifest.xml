@@ -44,11 +44,29 @@
             android:exported="true" >
             <intent-filter>
                 <action android:name="com.gzk.sample.aidl.CalulateService" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".service.MessengerTestService"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.gzk.sample.service.MessengerTestService" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
 
+        <activity android:name=".activity.ServiceTestActivity" >
+        </activity>
 
+        <service
+            android:name=".service.ServiceTest"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
