@@ -3,7 +3,9 @@ package com.gzk.sample.activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,8 @@ import android.widget.Button;
 
 import com.gzk.sample.R;
 import com.gzk.sample.service.ServiceTest;
+
+import java.lang.ref.WeakReference;
 
 public class ServiceTestActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -75,7 +79,7 @@ public class ServiceTestActivity extends AppCompatActivity implements View.OnCli
 
     private void startService() {
         intentService = new Intent(ServiceTestActivity.this, ServiceTest.class);
-        intentService.putExtra("startService","startService");
+        intentService.putExtra("startService", "startService");
         startService(intentService);
     }
 
@@ -87,7 +91,7 @@ public class ServiceTestActivity extends AppCompatActivity implements View.OnCli
 
     private void bindService() {
         Intent intentService = new Intent(ServiceTestActivity.this, ServiceTest.class);
-        intentService.putExtra("bindService","bindService");
+        intentService.putExtra("bindService", "bindService");
         bindService(intentService, mServiceConnection, BIND_AUTO_CREATE);
     }
 
@@ -109,4 +113,29 @@ public class ServiceTestActivity extends AppCompatActivity implements View.OnCli
             mServiceTest = null;
         }
     };
+
+
+    private Handler mHamdler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
+
+
+    private static class MyHandler extends Handler {
+        private WeakReference<ServiceTestActivity> mActivity;
+
+        public MyHandler(ServiceTestActivity activity) {
+            mActivity = new WeakReference<ServiceTestActivity>(activity);
+        }
+
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    }
+
+
 }
