@@ -19,6 +19,28 @@ public class InnerTestJava {
         InnerTestJava1 test1 = new InnerTestJava1();
         test1.out();
 
+        int e = test.tryTest();
+
+        System.out.println("tryTest 1 e=" + e);
+    }
+
+    private int tryTest() {
+        int a = 0;
+        try {
+            System.out.println("tryTest 1 a=" + a);
+            return 1;
+        } catch (Exception e) {
+            System.out.println("tryTest 2 a=" + a);
+            System.out.println("tryTest 2");
+            e.printStackTrace();
+        } finally {
+            System.out.println("tryTest 3 a=" + a);
+            System.out.println("tryTest 3");
+        }
+
+        System.out.println("tryTest 4");
+
+        return 0;
     }
 
 
@@ -37,5 +59,13 @@ public class InnerTestJava {
             System.out.println("Bean2: i=" + i);
         }
     }
+
+
+
+    public int method1(int a, int b) { return 0; }
+    //private int method1(int a, int b) { return 0; }
+    private int method1(int a, long b) { return 0; }
+    //public short method1(int a, int b) { return 0; }
+    //static protected int method1(int a, int b) { return 0; }
 
 }

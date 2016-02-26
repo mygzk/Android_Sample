@@ -27,8 +27,22 @@ public class Fruite {
             super.start();
         }
 
-
     }
+
+
+    public void changeName() {
+    }
+
+    public void changeName(int q) {
+    }
+
+    public int changeName(int q, String s) {
+        return 0;
+    }
+
+
+
+    protected int method1(int a, int b) { return 0; }
 
 
 }
