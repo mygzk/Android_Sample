@@ -1,7 +1,8 @@
-package com.gzk.sample.observer;
+package com.example.observer;
 
-import com.gzk.sample.observer.iml.Observer;
-import com.gzk.sample.observer.iml.Subject;
+
+import com.example.observer.iml.Observer;
+import com.example.observer.iml.Subject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by gzhenk on 16-2-26.
  */
-public class BufferData implements Subject{
+public class BufferData implements Subject {
     private int onlinePlayersNum = 0; // store online players num
     private List<Observer> observers = new ArrayList<Observer>(); // refer to all observers
 

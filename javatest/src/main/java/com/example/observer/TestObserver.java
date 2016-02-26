@@ -1,4 +1,4 @@
-package com.gzk.sample.observer;
+package com.example.observer;
 
 /**
  * Created by gzhenk on 16-2-26.

@@ -1,6 +1,7 @@
-package com.gzk.sample.observer;
+package com.example.observer;
 
-import com.gzk.sample.observer.iml.Observer;
+
+import com.example.observer.iml.Observer;
 
 /**
  * Created by gzhenk on 16-2-26.
